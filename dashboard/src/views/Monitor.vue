@@ -1,8 +1,16 @@
 <template>
-  <b-row class="d-flex flex-wrap justify-content-around"
-         cols-lg="4" cols-md="2" cols="1">
-    <b-col v-for="i in 10" :key="i">
-      <PlotChart :chartData="chartData()" :width="200" :height="200" />
+  <b-row fluid>
+    <b-col lg="8" md="12">
+      <b-row class="d-flex flex-wrap justify-content-around align-items-stretch"
+             cols-xl="3" cols-sm="2">
+        <b-col v-for="i in 5" :key="i">
+          <PlotChart :chart-data="chartData()" :width="200" :height="200" />
+        </b-col>
+      </b-row>
+    </b-col>
+
+    <b-col lg="4" md="12" class="h-100">
+      <PlotChart :chart-data="chartData()" class="h-100" />
     </b-col>
   </b-row>
 </template>
