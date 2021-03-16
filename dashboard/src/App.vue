@@ -1,39 +1,20 @@
 <template>
   <div id="app">
     <b-container>
-      <header class="mb-5 text-center">
-        <img alt="Gaul logo"
-             src="./assets/gaul.webp"
-             class="align-self-center"
-             style="max-width: 250px">
-        <h1 class="display-4">Ground Station Dashboard</h1>
-
-        <b-row class="d-flex justify-content-center text-center">
-          <b-col v-for="(link, idx) in links" :key="idx"
-                 cols="1">
-            <router-link :to="link.path">{{ link.name }}</router-link>
-          </b-col>
-        </b-row>
-      </header>
-
+      <Navbar />
       <router-view />
     </b-container>
   </div>
 </template>
 
 <script>
+import Navbar from './views/Navbar.vue'
 
 export default {
   name: 'App',
-  components: {},
-  data() {
-    return {
-      links: [
-        { path: '/', name: 'Monitor' },
-        { path: '/tracking', name: 'Tracking' }
-      ]
-    }
-  }
+  components: {
+    Navbar
+  },
 }
 </script>
 
@@ -47,7 +28,6 @@ export default {
 
 #nav {
   padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;

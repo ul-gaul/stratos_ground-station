@@ -4,24 +4,24 @@
       <b-row class="d-flex flex-wrap justify-content-around align-items-stretch"
              cols-xl="3" cols-sm="2">
         <b-col v-for="i in 5" :key="i">
-          <PlotChart :chart-data="chartData()" :width="200" :height="200" />
+          <Temperature :chart-data="chartData()" :width="200" :height="200" />
         </b-col>
       </b-row>
     </b-col>
 
     <b-col lg="4" md="12" class="h-100">
-      <PlotChart :chart-data="chartData()" class="h-100" />
+      <Temperature :chart-data="chartData()" class="h-100" />
     </b-col>
   </b-row>
 </template>
 
 <script>
-import PlotChart from '../components/PlotChart.vue';
+import Temperature from '../components/Temperature.vue';
 import rdm from '../modules/utils/random';
 
 export default {
   name: "Monitor",
-  components: { PlotChart },
+  components: { Temperature },
   methods: {
     chartData() {
       return {

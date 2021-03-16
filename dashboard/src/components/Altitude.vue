@@ -1,7 +1,3 @@
-<!--<template>-->
-<!--	<chart :chart-data="datacollection" :width="200" :height="200"></chart>-->
-<!--</template>-->
-
 <script>
 import { Line, mixins } from 'vue-chartjs'
 
