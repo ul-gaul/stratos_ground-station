@@ -6,7 +6,7 @@
         <b-col key="1"><TemperatureInt :chart-data="chartData()" :width="200" :height="200" /></b-col>        
         <b-col key="2"><TemperatureExt :chart-data="chartData()" :width="200" :height="200" /></b-col>        
         <b-col key="3"><Pression :chart-data="chartData()" :width="200" :height="200" /></b-col>        
-        <b-col key="4"><Altitude :chart-data="chartData()" :width="200" :height="200" /></b-col>        
+        <b-col key="4"><Altitude :data="fetchData('altitude')" :options="setOptions('Altitude')" :width="200" :height="200" /></b-col>        
         <b-col key="5"><Vitesse :chart-data="chartData()" :width="200" :height="200" /></b-col>
       </b-row>
     </b-col>
@@ -24,6 +24,7 @@ import TemperatureInt from '../components/TemperatureInt.vue';
 import TemperatureExt from '../components/TemperatureExt.vue';
 import Vitesse from '../components/Vitesse.vue';
 import rdm from '../modules/utils/random';
+import gatheredJSON from '../../../gathered.json';
 
 export default {
   name: "Monitor",
@@ -45,6 +46,30 @@ export default {
           data: rdm.coords()
         } ]
       };
+    },
+    fetchData(component) {
+      console.log(gatheredJSON[component]);
+      return gatheredJSON[component];
+    },
+    setOptions(title) {
+      return {
+        title: {
+            display: true,
+            text: title
+        },
+        scales: {
+          yAxes: [{
+            ticks: { beginAtZero: true },
+            gridLines: { display: true },
+          }],
+          xAxes: [{
+            gridLines: { display: true },
+          }]
+        },
+        legend: { display: false },
+        responsive: true,
+        maintainAspectRatio: false,
+      }
     }
   }
 }
