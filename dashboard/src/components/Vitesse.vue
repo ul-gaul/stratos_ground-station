@@ -9,6 +9,10 @@ export default {
   data() {
     return {
       options: {
+        title: {
+            display: true,
+            text: 'Vitesse'
+        },
         scales: {
           yAxes: [{
             ticks: { beginAtZero: true },
@@ -18,7 +22,7 @@ export default {
             gridLines: { display: true },
           }]
         }, // END options.scales
-        legend: { display: true },
+        legend: { display: false },
         responsive: true,
         maintainAspectRatio: false,
       }, // END options

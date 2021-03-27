@@ -1,14 +1,18 @@
 <script>
-import { Line, mixins } from 'vue-chartjs'
+import { Bar, mixins } from 'vue-chartjs'
 
 export default {
-  extends: Line,
+  extends: Bar,
   mixins: [mixins.reactiveProp],
   // props: ['chartData'],
   components: {},
   data() {
     return {
       options: {
+        title: {
+            display: true,
+            text: 'Altitude'
+        },
         scales: {
           yAxes: [{
             ticks: { beginAtZero: true },
@@ -18,7 +22,7 @@ export default {
             gridLines: { display: true },
           }]
         }, // END options.scales
-        legend: { display: true },
+        legend: { display: false },
         responsive: true,
         maintainAspectRatio: false,
       }, // END options

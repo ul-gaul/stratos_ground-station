@@ -10,7 +10,7 @@ export default {
       options: {
         title: {
             display: true,
-            text: 'Pression'
+            text: 'Payload'
         },
         scales: {
           yAxes: [{

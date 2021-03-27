@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-container>
+    <b-container fluid>
       <Navbar />
       <router-view />
     </b-container>

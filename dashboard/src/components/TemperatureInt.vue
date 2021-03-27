@@ -7,7 +7,12 @@ export default {
   components: {},
   data() {
     return {
+      type: "pie",
       options: {
+        title: {
+            display: true,
+            text: 'TemperatureInt'
+        },
         scales: {
           yAxes: [{
             ticks: { beginAtZero: true },
@@ -17,7 +22,7 @@ export default {
             gridLines: { display: true },
           }]
         }, // END options.scales
-        legend: { display: true },
+        legend: { display: false },
         responsive: true,
         maintainAspectRatio: false,
       }, // END options

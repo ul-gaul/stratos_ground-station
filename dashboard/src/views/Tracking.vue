@@ -1,7 +1,7 @@
 <template>
   <b-row class="d-flex flex-wrap justify-content-around align-content-stretch"
          cols-lg="3" cols-md="2" cols="1">
-    <b-col>
+    <b-col lg="8">
       <Map />
     </b-col>
     <b-col>
@@ -40,5 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.d-flex {
+  margin-top: 20px;
+}
 </style>
