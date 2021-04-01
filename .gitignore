@@ -1,4 +1,10 @@
+.idea/
+.vscode/
+.history/
+*.workspace
+
 # Binaries for programs and plugins
+bin/
 *.exe
 *.exe~
 *.dll
