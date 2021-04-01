@@ -59,30 +59,43 @@ Contains the frontend. (VueJS)
 
 ## TODOs
 
-- [ ] **CLI <sup><sub>(/cmd)</sub></sup>:** read args from command line. (see [spf13/cobra](https://github.com/spf13/cobra))
-- [ ] **Config <sup><sub>(/config)</sub></sup>:** read configurations from files. (
+- [ ] **[CLI][i2] <sup><sub>(/cmd)</sub></sup>:** read args from command line. (see [spf13/cobra](https://github.com/spf13/cobra))
+- [ ] **[Config][i1] <sup><sub>(/config)</sub></sup>:** read configurations from files. (
   see [spf13/viper](https://github.com/spf13/viper))
-- [ ] **Backend <sup><sub>(/acquisition)</sub></sup>**
-  - [ ] **Data acquisition:** read data received by the RF module.
-  - [ ] **Transform data:** transform raw data into a human readable form.
-  - [ ] **Save data:** save transformed data into a file.
-  - [ ] **Read data:** add the possibility to read data from a file.
+- [ ] **[Backend][iBackend] <sup><sub>(/acquisition)</sub></sup>**
+  - [ ] **[Data acquisition:][i3]** read data received by the RF module.
+  - [ ] **[Transform data:][i4]** transform raw data into a human readable form.
+  - [ ] **[Save data:][i5]** save transformed data into a file.
+  - [ ] **[Read data:][i6]** add the possibility to read data from a file.
   - [ ] **Tests:** create unit tests.
     - [ ] **Data acquisition:** test functions of the data acquisition.
     - [ ] **Transfrom data:** test functions tranforming the data.
     - [ ] **Save data:** test functions saving data into files.
     - [ ] **Read data:** test functions reading data from files.
-- [ ] **Controller <sup><sub>(/controller)</sub></sup>**
-  - [ ] **Bindings:** create bindings allowing the frontend to call Go functions.
-  - [ ] **Dispatch:** create functions to send data to frontend.
+- [ ] **[Controller][iController] <sup><sub>(/controller)</sub></sup>**
+  - [ ] **[Bindings:][i7]** create bindings allowing the frontend to call Go functions.
+  - [ ] **[Dispatch:][i8]** create functions to send data to frontend.
   - [ ] **Tests:** create unit tests.
     - [ ] **Bindings:** test bindings functions.
     - [ ] **Dispatch:** test dispatch functions.
-- [ ] **Frontend <sup><sub>(/dashboard)</sub></sup>**
-  - [ ] **Data reception:** create the functions receiving the data from the backend.
+- [ ] **[Frontend][iFrontent] <sup><sub>(/dashboard)</sub></sup>**
+  - [ ] **[Data reception:][i9]** create the functions receiving the data from the backend.
   - [ ] **Tests:** create unit tests.
     - [ ] **Data reception:** test the functions used to receive the data from the backend.
     - [ ] **Other:** test other functions of the frontend.
 - [ ] **Other**
   - [ ] **Mage:** targets/commands to add to magefile
     - [ ] **Crossbuild:** add a target to build the project for Raspberry Pi (`GOOS=linux`, `GOARCH=arm`)
+
+[i1](/ul-gaul/stratos_ground-station/issues/1)
+[i2](/ul-gaul/stratos_ground-station/issues/2)
+[i3](/ul-gaul/stratos_ground-station/issues/3)
+[i4](/ul-gaul/stratos_ground-station/issues/4)
+[i5](/ul-gaul/stratos_ground-station/issues/5)
+[i6](/ul-gaul/stratos_ground-station/issues/6)
+[i7](/ul-gaul/stratos_ground-station/issues/7)
+[i8](/ul-gaul/stratos_ground-station/issues/8)
+[i9](/ul-gaul/stratos_ground-station/issues/9)
+[iBackend](/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Abackend)
+[iController](/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Acontroller)
+[iFrontend](/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Afrontend)
