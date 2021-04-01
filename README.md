@@ -9,7 +9,7 @@ _**TODO:** describe the project_
 The following languages need to be installed to be able to run and build the project.
 
 - [NodeJS](https://nodejs.org/en/download/current/)
-- [Go / Golang](https://golang.org/doc/install) (Min version: **v1.16**)<br>
+- [Go / Golang](https://golang.org/doc/install) (min version: **v1.16**)<br>
   <sup>Run `go version` to get your current version</sup>
 
 Once this is done, you need to install [Mage](https://magefile.org/). To do so open a terminal and execute the following
@@ -83,4 +83,6 @@ Contains the frontend. (VueJS)
   - [ ] **Tests:** create unit tests.
     - [ ] **Data reception:** test the functions used to receive the data from the backend.
     - [ ] **Other:** test other functions of the frontend.
-
+- [ ] **Other**
+  - [ ] **Mage:** targets/commands to add to magefile
+    - [ ] **Crossbuild:** add a target to build the project for Raspberry Pi (`GOOS=linux`, `GOARCH=arm`)
