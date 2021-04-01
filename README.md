@@ -78,7 +78,7 @@ Contains the frontend. (VueJS)
   - [ ] **Tests:** create unit tests.
     - [ ] **Bindings:** test bindings functions.
     - [ ] **Dispatch:** test dispatch functions.
-- [ ] **[Frontend][iFrontent] <sup><sub>(/dashboard)</sub></sup>**
+- [ ] **[Frontend][iFrontend] <sup><sub>(/dashboard)</sub></sup>**
   - [ ] **[Data reception:][i9]** create the functions receiving the data from the backend.
   - [ ] **Tests:** create unit tests.
     - [ ] **Data reception:** test the functions used to receive the data from the backend.
