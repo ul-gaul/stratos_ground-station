@@ -10,7 +10,7 @@ The following languages need to be installed to be able to run and build the pro
 
 - [NodeJS](https://nodejs.org/en/download/current/)
 - [Go / Golang](https://golang.org/doc/install) (Min version: **v1.16**)<br>
-  <small>Run `go version` to get your current version</small>
+  <sup>Run `go version` to get your current version</sup>
 
 Once this is done, you need to install [Mage](https://magefile.org/). To do so open a terminal and execute the following
 commands or follow the instructions [here](https://magefile.org/#installation):
@@ -25,7 +25,7 @@ go run bootstrap.go
 
 The project uses [Mage](https://magefile.org) to make it easier to run and build the project. <br>
 Here are the principal mage targets/commands:<br>
-<small>(run `mage -l` to list all available targets)</small>
+<sup>(run `mage -l` to list all available targets)</sup>
 
 <dl>
 <dt><code>mage</code> or <code>mage run</code></dt>
@@ -44,11 +44,11 @@ Here are the principal mage targets/commands:<br>
 <dt>/acquisition</dt>
 <dd>Contains the backend. (data acquisition, data transformation, etc.)</dd>
 
-<dt>/cmd <small>(TODO)</small></dt>
+<dt>/cmd <sup><sub>(TODO)</sub></sup></dt>
 <dd>Contains the code reading arguements passed from the CLI.<br>
-<small><em>(CLI: Command Line Interface)</em></small></dd>
+<sup><em>(CLI: Command Line Interface)</em></sup></dd>
 
-<dt>/config <small>(TODO)</small></dt>
+<dt>/config <sup><sub>(TODO)</sub></sup></dt>
 <dd>Contains the code reading the configuration from a file.</dd>
 
 <dt>/dashboard</dt>
@@ -59,10 +59,10 @@ Contains the frontend. (VueJS)
 
 ## TODOs
 
-- [ ] **CLI <small>(/cli)</small>:** read args from command line. (see [spf13/cobra](https://github.com/spf13/cobra))
-- [ ] **Config <small>(/config)</small>:** read configurations from files. (
+- [ ] **CLI <sup><sub>(/cmd)</sub></sup>:** read args from command line. (see [spf13/cobra](https://github.com/spf13/cobra))
+- [ ] **Config <sup><sub>(/config)</sub></sup>:** read configurations from files. (
   see [spf13/viper](https://github.com/spf13/viper))
-- [ ] **Backend <small>(/acquisition)</small>**
+- [ ] **Backend <sup><sub>(/acquisition)</sub></sup>**
   - [ ] **Data acquisition:** read data received by the RF module.
   - [ ] **Transform data:** transform raw data into a human readable form.
   - [ ] **Save data:** save transformed data into a file.
@@ -72,13 +72,13 @@ Contains the frontend. (VueJS)
     - [ ] **Transfrom data:** test functions tranforming the data.
     - [ ] **Save data:** test functions saving data into files.
     - [ ] **Read data:** test functions reading data from files.
-- [ ] **Controller <small>(/controller)</small>**
+- [ ] **Controller <sup><sub>(/controller)</sub></sup>**
   - [ ] **Bindings:** create bindings allowing the frontend to call Go functions.
   - [ ] **Dispatch:** create functions to send data to frontend.
   - [ ] **Tests:** create unit tests.
     - [ ] **Bindings:** test bindings functions.
     - [ ] **Dispatch:** test dispatch functions.
-- [ ] **Frontend <small>(/dashboard)</small>**
+- [ ] **Frontend <sup><sub>(/dashboard)</sub></sup>**
   - [ ] **Data reception:** create the functions receiving the data from the backend.
   - [ ] **Tests:** create unit tests.
     - [ ] **Data reception:** test the functions used to receive the data from the backend.
