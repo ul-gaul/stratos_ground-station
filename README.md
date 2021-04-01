@@ -87,15 +87,16 @@ Contains the frontend. (VueJS)
   - [ ] **Mage:** targets/commands to add to magefile
     - [ ] **Crossbuild:** add a target to build the project for Raspberry Pi (`GOOS=linux`, `GOARCH=arm`)
 
-[i1](/ul-gaul/stratos_ground-station/issues/1)
-[i2](/ul-gaul/stratos_ground-station/issues/2)
-[i3](/ul-gaul/stratos_ground-station/issues/3)
-[i4](/ul-gaul/stratos_ground-station/issues/4)
-[i5](/ul-gaul/stratos_ground-station/issues/5)
-[i6](/ul-gaul/stratos_ground-station/issues/6)
-[i7](/ul-gaul/stratos_ground-station/issues/7)
-[i8](/ul-gaul/stratos_ground-station/issues/8)
-[i9](/ul-gaul/stratos_ground-station/issues/9)
-[iBackend](/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Abackend)
-[iController](/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Acontroller)
-[iFrontend](/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Afrontend)
+
+[i1]: https://github.com/ul-gaul/stratos_ground-station/issues/1
+[i2]: https://github.com/ul-gaul/stratos_ground-station/issues/2
+[i3]: https://github.com/ul-gaul/stratos_ground-station/issues/3
+[i4]: https://github.com/ul-gaul/stratos_ground-station/issues/4
+[i5]: https://github.com/ul-gaul/stratos_ground-station/issues/5
+[i6]: https://github.com/ul-gaul/stratos_ground-station/issues/6
+[i7]: https://github.com/ul-gaul/stratos_ground-station/issues/7
+[i8]: https://github.com/ul-gaul/stratos_ground-station/issues/8
+[i9]: https://github.com/ul-gaul/stratos_ground-station/issues/9
+[iBackend]: https://github.com/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Abackend
+[iController]: https://github.com/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Acontroller
+[iFrontend]: https://github.com/ul-gaul/stratos_ground-station/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Afrontend
