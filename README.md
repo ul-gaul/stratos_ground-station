@@ -15,11 +15,17 @@ The following languages need to be installed to be able to run and build the pro
 Once this is done, you need to install [Mage](https://magefile.org/). To do so open a terminal and execute the following
 commands or follow the instructions [here](https://magefile.org/#installation):
 
+On Windows:
 ```sh
-go get -u -d github.com/magefile/mage
-cd $GOPATH/src/github.com/magefile/mage
+git clone https://github.com/magefile/mage
+cd mage
 go run bootstrap.go
 ```
+On MacOS:
+```sh
+brew install mage
+```
+
 
 ### Run & Build
 
