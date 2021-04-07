@@ -1,22 +1,21 @@
-import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { createApp, readonly } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { onDataReceived, state } from '@/modules/state'
 
-// Import Bootstrap an BootstrapVue CSS files (order is important)
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import PrimeVue from 'primevue/config'
+import 'primevue/resources/themes/bootstrap4-dark-blue/theme.css'
+import 'primevue/resources/primevue.min.css'
+import 'primeicons/primeicons.css'
+import 'primeflex/primeflex.scss'
 
-// Make BootstrapVue available throughout your project
-Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
+window.go_ondata = onDataReceived;
 
-// TODO Change to false before production build
-Vue.config.productionTip = true
-Vue.config.devtools = true
+const app = createApp(App)
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+// noinspection JSCheckFunctionSignatures
+app.use(PrimeVue, { ripple: true })
+app.use(router)
+
+app.config.globalProperties.$state = readonly(state)
+app.mount('#app')

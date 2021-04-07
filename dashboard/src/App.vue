@@ -1,40 +1,38 @@
 <template>
-  <div id="app">
-    <Navbar />
-    <b-container fluid>
-      <router-view />
-    </b-container>
-  </div>
+  <Navbar/>
+  <router-view/>
 </template>
-
 <script>
-import Navbar from './views/Navbar.vue'
+import Navbar from '@/components/Navbar'
 
 export default {
-  name: 'App',
-  components: {
-    Navbar
-  },
+  components: { Navbar },
+  async created() {
+    // noinspection JSUnresolvedVariable
+    const goConnect = window.go_connect;
+    if (typeof goConnect === 'function') {
+      window.go_ondata(await goConnect());
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--surface-0);
+  color: var(--text-color);
 }
 
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+* {
+  ::-webkit-scrollbar {
+    width: 5px;
+    background-color: var(--surface-d)
+  }
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color)
   }
 }
 </style>

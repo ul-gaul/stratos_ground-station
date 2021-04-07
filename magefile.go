@@ -3,19 +3,22 @@
 package main
 
 import (
+    "context"
     "fmt"
     "github.com/magefile/mage/mg" // mg contains helpful utility functions, like Deps
     "github.com/magefile/mage/sh"
     log "github.com/sirupsen/logrus"
     "os"
+    "os/exec"
     "path/filepath"
     "runtime"
+    "syscall"
     "time"
 )
 
-const (
+var (
     packageName     = "github.com/ul-gaul/stratos_ground-station"
-    backendDelay    = 15 * time.Second
+    backendDelay    = 10 * time.Second
     frontendDir     = "dashboard"
     appName         = "ground-station"
     binaryOutputDir = "bin/"
@@ -39,55 +42,48 @@ func init() {
     _ = os.Setenv("GO111MODULE", "on")
 }
 
-type Frontend mg.Namespace
-
-func (Frontend) InstallDeps() error {
-    log.Info("Installing dependencies...")
-    return npm("install")
-}
-
-func (Frontend) Build() error {
-    mg.Deps(Frontend{}.InstallDeps)
-    log.Info("Building Frontend...")
-    return npm("run", "build")
-}
-
-func (Frontend) Run() error {
-    mg.Deps(Frontend{}.InstallDeps)
-    log.Info("Starting Frontend...")
-    return npm("run", "serve")
-}
-
-type Backend mg.Namespace
-
-func (Backend) Run() error {
-    log.Info("Starting Backend...")
-    return sh.Run(goexe, "run", "-tags", "dev", ".")
-}
-
-func (Backend) Build() error {
-    log.Info("Building Application Binary...")
-    ext := ""
-    if runtime.GOOS == "windows" {
-        ext = ".exe"
+// wait the specified time before returning
+func wait(d time.Duration) {
+    ticker := time.NewTicker(time.Second)
+    defer ticker.Stop()
+    done := time.After(d)
+    end := time.Now().Add(d)
+    for {
+        select {
+        case <-ticker.C:
+            log.Infof("Backend starts in %s...",
+                time.Until(end).Truncate(time.Second))
+        case <-done:
+            return
+        }
     }
-    
-    env := map[string]string{
-        "PACKAGE":       packageName,
-        "FRONTEND_PATH": frontendDir,
-    }
-    
-    bin := fmt.Sprintf("%s-%s-%s%s", appName, runtime.GOOS, runtime.GOARCH, ext)
-    bin = filepath.Join(binaryOutputDir, bin)
-    return sh.RunWith(env, goexe, "build", "-ldflags", ldFlags, "-o", bin, ".")
 }
 
+// Build builds the frontend then builds the application binary
 func Build() error {
     log.Info("Building...")
     mg.Deps(Frontend{}.Build)
     return Backend{}.Build()
 }
 
+// Run starts the development server for the frontend then starts the backend
+func Run(ctx context.Context) error {
+    log.Info("Running...")
+    
+    var cancel context.CancelFunc
+    ctx, cancel = context.WithCancel(ctx)
+    defer cancel()
+    
+    mg.CtxDeps(ctx, Frontend{}.Run, func(ctx context.Context) error {
+        defer cancel()
+        wait(backendDelay)
+        return Backend{}.Run(ctx)
+    })
+    
+    return nil
+}
+
+// Clean removes compiled files and dependency folders.
 func Clean() error {
     log.Info("Cleaning...")
     
@@ -106,54 +102,68 @@ func Clean() error {
     return nil
 }
 
-func wait(d time.Duration) {
-    ticker := time.NewTicker(time.Second)
-    defer ticker.Stop()
-    done := time.After(d)
-    end := time.Now().Add(d)
-    for {
-        select {
-        case <-ticker.C:
-            log.Infof("Backend starts in %s...",
-                time.Until(end).Truncate(time.Second))
-        case <-done:
-            return
-        }
-    }
-}
 
-func Run() error {
-    log.Info("Running...")
-    
-    wd, err := os.Getwd()
-    if err != nil {
-        return err
+/***************************************** BACKEND *****************************************/
+
+type Backend mg.Namespace
+
+func (Backend) Build() error {
+    log.Info("Building Application Binary...")
+    ext := ""
+    if runtime.GOOS == "windows" {
+        ext = ".exe"
     }
     
-    mg.Deps(Frontend{}.Run, func() error {
-        wait(backendDelay)
-        _ = os.Chdir(wd)
-        err = Backend{}.Run()
-        if err != nil {
-            return err
-        }
-        os.Exit(0)
-        return nil
-    })
-    
-    return nil
-}
-
-func npm(args ...string) error {
-    return runFrom(frontendDir, "npm", args...)
-}
-
-func runFrom(dir, cmd string, args ...string) error {
-    wd, _ := os.Getwd()
-    if err := os.Chdir(dir); err != nil {
-        return err
+    env := map[string]string{
+        "PACKAGE":       packageName,
+        "FRONTEND_PATH": frontendDir,
     }
-    err := sh.RunV(cmd, args...)
-    _ = os.Chdir(wd)
-    return err
+    
+    bin := fmt.Sprintf("%s-%s-%s%s", appName, runtime.GOOS, runtime.GOARCH, ext)
+    bin = filepath.Join(binaryOutputDir, bin)
+    return sh.RunWithV(env, goexe, "build", "-ldflags", ldFlags, "-o", bin, ".")
+}
+
+func (Backend) Run(ctx context.Context) error {
+    log.Info("Starting Backend...")
+    return sh.RunV(goexe, "run", "-tags", "dev", ".")
+}
+
+/***************************************** FRONTEND *****************************************/
+
+type Frontend mg.Namespace
+
+func (Frontend) InstallDeps(ctx context.Context) error {
+    log.Info("Installing dependencies...")
+    return npm(ctx, "install")
+}
+
+func (Frontend) Build(ctx context.Context) error {
+    mg.Deps(Frontend{}.InstallDeps)
+    log.Info("Building Frontend...")
+    return npm(ctx, "run", "build")
+}
+
+func (Frontend) Run(ctx context.Context) error {
+    mg.CtxDeps(ctx, Frontend{}.InstallDeps)
+    log.Info("Starting Frontend...")
+    return npm(ctx, "run", "serve")
+}
+
+func npm(ctx context.Context, args ...string) error {
+    return runFrom(ctx, frontendDir, "npm", args...)
+}
+
+// runFrom runs the command from the specified directory
+func runFrom(ctx context.Context, dir, command string, args ...string) error {
+    cmd := exec.CommandContext(ctx, command, args...)
+    cmd.Dir = dir
+    cmd.Env = os.Environ()
+    cmd.Stderr = os.Stderr
+    cmd.Stdin = os.Stdin
+    cmd.Stdout = os.Stdout
+    cmd.SysProcAttr = &syscall.SysProcAttr{
+        Pdeathsig: syscall.SIGTERM | syscall.SIGKILL,
+    }
+    return cmd.Run()
 }

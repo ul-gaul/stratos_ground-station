@@ -1,85 +1,33 @@
 <template>
-  <b-row fluid>
-    <b-col lg="8" md="12">
-      <b-row class="d-flex flex-wrap justify-content-around align-items-stretch"
-             cols-xl="3" cols-sm="2">
-        <b-col key="1"><TemperatureInt :chart-data="chartData()" :width="200" :height="200" /></b-col>        
-        <b-col key="2"><TemperatureExt :chart-data="chartData()" :width="200" :height="200" /></b-col>        
-        <b-col key="3"><Pression :chart-data="chartData()" :width="200" :height="200" /></b-col>        
-        <b-col key="4"><Altitude :data="fetchData('altitude')" :options="setOptions('Altitude')" :width="200" :height="200" /></b-col>        
-        <b-col key="5"><Vitesse :chart-data="chartData()" :width="200" :height="200" /></b-col>
-      </b-row>
-    </b-col>
-    <b-col lg="4" md="12" class="h-100">
-      <Payload :chart-data="chartData()" class="h-100" />
-    </b-col>
-  </b-row>
+  <div class="p-grid p-nogutter">
+    <div class="p-col-12 p-lg-8">
+      <div class="p-grid p-nogutter">
+        <div v-for="(val, i) in charts" :key="i"
+             class="p-col-12 p-lg-6 p-p-1">
+          <StateTimeDataChart :states="val" :height="400" />
+        </div>
+      </div>
+    </div>
+    <div class="p-col-12 p-lg-4 p-p-1">
+      <StateTimeDataChart states="payloads" :height="800" />
+    </div>
+  </div>
 </template>
-
 <script>
-import Altitude from '../components/Altitude.vue';
-import Payload from '../components/Payload.vue';
-import Pression from '../components/Pression.vue';
-import TemperatureInt from '../components/TemperatureInt.vue';
-import TemperatureExt from '../components/TemperatureExt.vue';
-import Vitesse from '../components/Vitesse.vue';
-import rdm from '../modules/utils/random';
-import gatheredJSON from '../../../gathered.json';
+import StateTimeDataChart from '@/components/StateTimeDataChart'
 
 export default {
-  name: "Monitor",
-  components: {
-    Altitude,
-    Payload,
-    Pression, 
-    TemperatureInt,
-    TemperatureExt,
-    Vitesse
-  },
-  methods: {
-    chartData() {
-      return {
-        labels: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May' ],
-        datasets: [ {
-          label: 'Dataset 1',
-          backgroundColor: rdm.rgba(0.1),
-          data: rdm.coords()
-        } ]
-      };
-    },
-    fetchData(component) {
-      console.log(gatheredJSON[component]);
-      return gatheredJSON[component];
-    },
-    setOptions(title) {
-      return {
-        title: {
-            display: true,
-            text: title
-        },
-        scales: {
-          yAxes: [{
-            ticks: { beginAtZero: true },
-            gridLines: { display: true },
-          }],
-          xAxes: [{
-            gridLines: { display: true },
-          }]
-        },
-        legend: { display: false },
-        responsive: true,
-        maintainAspectRatio: false,
-      }
+  name: 'Monitor',
+  components: { StateTimeDataChart },
+  data() {
+    return {
+      charts: [
+        [ 'internalTemps:Internal Temp. (°C)', 'externalTemps:External Temp. (°C)' ],
+        'pressures:Pressure (Pa)',
+        'altitudes:Altitude (m)',
+        'speeds:Speed (m/s)'
+      ]
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.d-flex {
-  margin-top: 20px;
-}
-.h-100 {
-  margin-top: 20px;
-}
-</style>

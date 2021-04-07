@@ -1,19 +1,25 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Monitor from '../views/Monitor.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Monitor from '@/views/Monitor.vue'
 
-Vue.use(VueRouter)
+const routes = [{
+  path: '/',
+  name: 'Monitor',
+  component: Monitor
+}, {
+  path: '/tracking',
+  name: 'Tracking',
+  // route level code-splitting
+  // this generates a separate chunk (about.[hash].js) for this route
+  // which is lazy-loaded when the route is visited.
+  component: () => import(/* webpackChunkName: "tracking" */ '@/views/Tracking.vue')
+}, {
+  path: '/table',
+  name: 'Table',
+  component: () => import(/* webpackChunkName: "table" */ '@/views/Table.vue')
+}]
 
-const routes = [
-  { path: '/', component: Monitor },
-  {
-    path: '/tracking',
-    name: 'Tracking',
-    component: () => import('../views/Tracking.vue')
-  }
-]
-
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHashHistory(),
   routes
 })
 

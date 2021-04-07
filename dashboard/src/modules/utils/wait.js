@@ -1,5 +1,14 @@
 
 /**
+ * Attend un certain temps.
+ *
+ * @example
+ * async function() {
+ *     // Do things...
+ *     await wait(3000) // Wait 3 seconds
+ *     // Do other things...
+ * }
+ *
  * @param {number} [ms=0] - Temps d'attente en millisecondes (ms)
  * @returns {Promise<void>}
  */
