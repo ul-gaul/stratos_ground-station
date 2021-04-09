@@ -1,15 +1,25 @@
-FROM gaul0/stratos-ground-station:latest AS build-go
+ARG OUTPUT_DIR='/out'
 
-ENV APP_NAME='ground-station'
-ENV FRONTEND_DIR='dashboard'
+FROM gaul0/stratos-ground-station:latest AS build-go
+# Use --build-arg to set ARGs when building the image
+ARG BUILD_TARGETS='linux/amd64,linux/arm64,linux/arm/7,windows/amd64'
+ARG APP_NAME='ground-station'
+ARG FRONTEND_DIR='dashboard'
+ARG SKIP_FRONTEND
+ARG OUTPUT_DIR
+ARG USE_ANSI=1
+
+ENV APP_NAME=$APP_NAME \
+    FRONTEND_DIR=$FRONTEND_DIR \
+    SKIP_FRONTEND=$SKIP_FRONTEND \
+    OUTPUT_DIR=$OUTPUT_DIR \
+    USE_ANSI=$NO_ANSI
 
 COPY . .
-RUN /tools/build.sh \
-    'linux/amd64' \
-    'linux/arm64' \
-    'linux/arm' \
-    'windows/amd64'
 
-##############################################
+RUN echo "$BUILD_TARGETS" | xargs -d, /tools/build.sh
+
+##################################################
 FROM scratch
-COPY --from=build-go /out/* ./
+ARG OUTPUT_DIR
+COPY --from=build-go "$OUTPUT_DIR" .
