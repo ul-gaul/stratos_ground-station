@@ -1,0 +1,13 @@
+.git/*
+bin/*
+
+dashboard/node_modules/*
+dashboard/dist/*
+
+*.dev.go
+*.csv
+*.md
+
+**/.*
+
+magefile.go

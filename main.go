@@ -16,8 +16,9 @@ import (
     "github.com/ul-gaul/stratos_ground-station/pool"
 )
 
-// Set via -ldflags
-var FrontendIndexPath string
+const (
+	FrontendIndexPath = "dashboard/dist/index.html"
+)
 
 //go:embed dashboard/dist
 var content embed.FS
