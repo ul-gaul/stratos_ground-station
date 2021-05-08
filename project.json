@@ -15,7 +15,7 @@
   },
   "tags": "",
   "WailsVersion": null,
-  "CrossCompile": true,
+  "CrossCompile": false,
   "Platform": "",
   "Architecture": "",
   "LdFlags": null,
