@@ -10,13 +10,10 @@ import (
 )
 
 func Start() {
-    log.Debug("Backend running...")
-    for {
-        select {
-        case <-time.After(5 * time.Second):
-            log.Debug("Backend running...")
-        default:
-        }
+    log.Info("Backend running...")
+    ticker := time.NewTicker(3 * time.Second)
+    for range ticker.C {
+        log.Info("Backend running...")
     }
 }
 
