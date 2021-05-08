@@ -1,0 +1,29 @@
+{
+  "name": "stratos-basestation",
+  "description": "GAUL - Stratos Ground Stration",
+  "author": {
+    "name": "GAUL"
+  },
+  "version": "0.1.0",
+  "binaryname": "basestation",
+  "frontend": {
+    "dir": "frontend",
+    "install": "npm install",
+    "build": "npm run build",
+    "bridge": "src",
+    "serve": "npm run serve"
+  },
+  "tags": "",
+  "WailsVersion": null,
+  "CrossCompile": true,
+  "Platform": "",
+  "Architecture": "",
+  "LdFlags": null,
+  "GoPath": null,
+  "UseFirebug": false,
+  "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+  ]
+}
