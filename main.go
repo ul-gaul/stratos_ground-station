@@ -4,17 +4,14 @@ import (
     _ "embed"
     log "github.com/sirupsen/logrus"
     "github.com/ul-gaul/stratos_ground-station/backend/acquisition/utils"
+    "github.com/ul-gaul/stratos_ground-station/backend/config"
+    _ "github.com/ul-gaul/stratos_ground-station/backend/config"
     "github.com/ul-gaul/stratos_ground-station/backend/controller"
     "github.com/ul-gaul/stratos_ground-station/backend/pool"
     "github.com/wailsapp/wails"
 )
 
-// TODO obtain from config
-const (
-    Title         = "Stratos - Base Station"
-    DefaultWidth  = 1024
-    DefaultHeight = 768
-)
+const Title = "Stratos - Ground Station"
 
 //go:embed frontend/dist/app.js
 var js string
@@ -26,8 +23,8 @@ func main() {
     defer pool.Release()
     
     app := wails.CreateApp(&wails.AppConfig{
-        Width:            DefaultWidth,
-        Height:           DefaultHeight,
+        Width:            config.General.WindowWidth,
+        Height:           config.General.WindowHeight,
         Title:            Title,
         JS:               js,
         CSS:              css,
@@ -35,10 +32,11 @@ func main() {
         Resizable:        true,
         DisableInspector: false,
     })
+    
     app.Bind(controller.Controller)
     utils.CheckErr(app.Run())
 }
 
 func init() {
-    log.SetLevel(log.DebugLevel)
+    log.SetLevel(config.General.LogLevel)
 }

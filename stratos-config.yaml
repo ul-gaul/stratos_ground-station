@@ -1,0 +1,59 @@
+############################### General Settings ###############################
+General:
+
+  # Sets the verbosity level:
+  #   1 - log.FatalLevel
+  #   2 - log.ErrorLevel
+  #   3 - log.WarnLevel
+  #   4 - log.InfoLevel (default)
+  #   5 - log.DebugLevel
+  #   6 - log.TraceLevel
+  LogLevel: 5
+
+  # Width of the application window (default: 1024)
+  WindowWidth: 1024
+
+  # Width of the application window (default: 768)
+  WindowHeight: 768
+
+
+############################## Frontend Settings ###############################
+Frontend:
+
+  # Default maximum length of data shown in the charts and in the table.
+  # (default: 50)
+  DefaultDataLength: 50
+
+
+############################ Communication Settings ############################
+Comms:
+
+  # ByteOrder: LittleEndian / BigEndian (default: false)
+  UseBigEndian: false
+
+  DataPacket:
+
+    # Limit of consecutive lost/corrupted packets to ignore before an error
+    # occurs. (default: 20)
+    LossThreshold: 20
+
+    # Size of the channel receiving serial packets. (default: 5)
+    BufferSize: 5
+
+  Serial:
+    BaudRate: 115200
+    DataBits: 8
+
+    # Possible values:
+    #   0 - serial.NoParity (default)
+    #   1 - serial.OddParity
+    #   2 - serial.EvenParity
+    #   3 - serial.MarkParity
+    #   4 - serial.SpaceParity
+    Parity: 0
+
+    # Possible values:
+    #   0 - serial.OneStopBit (default)
+    #   1 - serial.OnePointFiveStopBits
+    #   2 - serial.TwoStopBits
+    StopBits: 0
