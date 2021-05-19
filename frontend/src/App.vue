@@ -1,14 +1,20 @@
 <template>
-  <Navbar/>
-  <router-view/>
+  <div>
+    <Navbar/>
+    <router-view/>
+  </div>
 </template>
 <script>
 import Navbar from '@/components/Navbar'
+import { onDataReceived } from '@/modules/state'
 
 export default {
   components: { Navbar },
   async created() {
-    await this.$controller.Connect()
+    let data = await this.$controller.Connect()
+    if (data != null) {
+      onDataReceived(data)
+    }
   }
 }
 </script>
