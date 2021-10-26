@@ -6,131 +6,55 @@ _**TODO:** describe the project_
 
 ### Requirements
 
-The following languages need to be installed to be able to run and build the project.
+The following languages and dependencies need to be installed to be able to run and build the project.
 
 - [Go / Golang](https://golang.org/doc/install) (min version: **v1.16**)<br>
   <sup>Run `go version` to get your current version</sup>
 - [Docker](https://docs.docker.com/get-started/#download-and-install-docker) <sub><sup>**(optional)**</sup></sub><br>
-  <sup>Only required to build the binaries (executable files).</sup>
+  <sup>Only required to cross-compile (see [build](#for-the-raspberry-pi-cross-compile))</sup>
 - [NodeJS](https://nodejs.org/en/download/current/)
+- [Wails](https://wails.app/gettingstarted/)
 
 ### Run
-There are 3 different ways to run the program. You can either run only the frontend, run only the backend with pre-built frontend files or run the backend with hot reload of the frontend.
 
-<dl>
-<dt>
-  1. With hot reload of frontend (recommended)<br>
-</dt>
-<dd>
-<sup>The application will run in a dedicated window.</sup>
-<details>
-  <summary>Steps</summary>
-
-1. Follow steps 1 to 4 descibed in [_Frontend only_](#run-frontend-steps).
-2. Open a second terminal in the project root directory.
-3. Start the application: `go run -tags dev .`
-
-<sub><em>
-<strong>Note 1:</strong> changes made to the frontend (in /dashboard) will automatically be reflected in the application window. <br>
-<strong>Note 2:</strong> only repeat steps 2 and 3 to see changes made to the backend.
-</em></sub>
-</details>
-</dd>
-
-<dt>
-  2. Without hot reload
-</dt>
-<dd>
-<sup>The application will run in a dedicated window.</sup>
-<details>
-  <summary>Steps</summary>
-
-1. Open a terminal in the project's root directory.
-2. Move to the frontend directory: `cd ./dashboard`
-3. Build the frontend: `npm run build`
-4. Move back to the project's root directory: `cd ..`
-6. Start the application: `go run .`
-
-<sub><em>
-<strong>Note 1:</strong> only repeat step 6 to see changes made to the backend. <br>
-<strong>Note 2:</strong> repeat all steps to see changes made to the frontend (in /dashboard).
-</em></sub>
-</details>
-</dd>
-
-<dt>
-  3. Frontend only
-</dt>
-<dd>
-<sup>Only the frontend development server will be running so no data will be provided from the backend.</sup>
-<details>
-  <summary id="run-frontend-steps">Steps</summary>
+To run the program in development mode:
 
 1. Open a terminal in the project root directory.
-2. Move to the frontend directory: `cd ./dashboard`
-3. Start the development server: `npm run serve`
-4. Wait for the application to be ready. <br>
+2. Start the backend: `wails serve`
+3. Open a second terminal in the project root directory.
+4. Move to the frontend directory: `cd ./frontend`
+5. Start the frontend: `npm run serve`
+6. Wait for the application to be ready. <br>
    <img alt="frontend-serve-ready" width="200" src="https://user-images.githubusercontent.com/14944216/113919412-933a2900-97b1-11eb-8a6b-66f9bb0abd7f.png"/>
-5. Open a browser and go to [localhost:8080](http://localhost:8080/).
-</details>
-</dd>
-
-</dl>
-
-
-### Mage
-
-Once this is done, you need to install [Mage](https://magefile.org/). To do so open a terminal and execute the following
-commands or follow the instructions [here](https://magefile.org/#installation):
-
-On Windows:
-```sh
-git clone https://github.com/magefile/mage
-cd mage
-go run bootstrap.go
-```
-On MacOS:
-```sh
-brew install mage
-```
+7. Open a browser and go to [localhost:8080](http://localhost:8080/).
 
 
 ### Build
 
-The project uses [Mage](https://magefile.org) to make it easier to run and build the project. <br>
-Here are the principal mage targets/commands:<br>
-<sup>(run `mage -l` to list all available targets)</sup>
+#### For your OS
 
-<dl>
-<dt>
-  <code>mage</code> or <code>mage build</code>
-</dt>
-<dd>
-  Builds and compiles the project into a binary.
-</dd>
+To build the binary (executable) for your operating system:
 
-<dt>
-  <code>mage clean</code>
-</dt>
-<dd>
-  Clean the project by removing built binaries, <em>node_modules</em> directory and other generated files.
-</dd>
-</dl>
+1. Open a terminal in the project root directory.
+2. Build the project: `wails build`
+
+#### For the Raspberry Pi (cross-compile)
+TODO
 
 ## Structure
 
 <dl>
-<dt>/acquisition</dt>
+<dt>/backend/acquisition</dt>
 <dd>Contains the backend. (data acquisition, data transformation, etc.)</dd>
 
-<dt>/cmd <sup><sub>(TODO)</sub></sup></dt>
+<dt>/backend/cmd <sup><sub>(TODO)</sub></sup></dt>
 <dd>Contains the code reading arguements passed from the CLI.<br>
 <sup><em>(CLI: Command Line Interface)</em></sup></dd>
 
-<dt>/config <sup><sub>(TODO)</sub></sup></dt>
+<dt>/backend/config <sup><sub>(TODO)</sub></sup></dt>
 <dd>Contains the code reading the configuration from a file.</dd>
 
-<dt>/dashboard</dt>
+<dt>/frontend</dt>
 <dd>
 Contains the frontend. (VueJS)
 </dd>
@@ -138,7 +62,7 @@ Contains the frontend. (VueJS)
 
 ## TODOs
 
-- [ ] **[CLI][i2] <sup><sub>(/cmd)</sub></sup>:** read args from command line. (see [spf13/cobra](https://github.com/spf13/cobra))
+- [X] **[CLI][i2] <sup><sub>(/cmd)</sub></sup>:** read args from command line. (see [spf13/cobra](https://github.com/spf13/cobra))
 - [ ] **[Config][i1] <sup><sub>(/config)</sub></sup>:** read configurations from files. (
   see [spf13/viper](https://github.com/spf13/viper))
 - [ ] **[Backend][iBackend] <sup><sub>(/acquisition)</sub></sup>**
