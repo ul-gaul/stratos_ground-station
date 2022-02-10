@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit"
+    "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
+    "test:unit": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service test:unit"
   },
   "dependencies": {
     "@wailsapp/runtime": "^1.1.1",
@@ -26,6 +26,7 @@
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/test-utils": "^2.0.0-0",
     "chai": "^4.1.2",
+    "cross-env": "^7.0.3",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2"
   }

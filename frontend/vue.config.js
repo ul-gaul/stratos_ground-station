@@ -20,7 +20,8 @@ module.exports = {
   },
   configureWebpack: {
     output: {
-      filename: '[name].js'
+      filename: '[name].js',
+      hashFunction: 'sha256'
     },
     optimization: {
       splitChunks: false
